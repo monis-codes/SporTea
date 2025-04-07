@@ -8,7 +8,24 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useSidebar } from "@/components/sidebar-provider"
 import { useAuth } from "@/components/auth-provider"
-import { Home, Users, Dumbbell, MessageSquare, LogOut, X, User } from "lucide-react"
+import { Home, Users, Dumbbell, MessageSquare, LogOut, X, User, Menu } from "lucide-react"
+
+// New component for the toggle button
+function SidebarToggle() {
+  const { open, setOpen, isMobile } = useSidebar()
+  
+  if (isMobile) return null;
+  
+  return (
+    <Button 
+      variant="ghost" 
+      size="icon" 
+      onClick={() => setOpen(!open)}
+    >
+      <Menu className="h-5 w-5" />
+    </Button>
+  );
+}
 
 export function MainSidebar() {
   const pathname = usePathname()
@@ -36,10 +53,7 @@ export function MainSidebar() {
         <div
           className={`fixed inset-y-0 left-0 z-50 w-72 bg-background shadow-lg transform transition-transform duration-300 ease-in-out ${open ? "translate-x-0" : "-translate-x-full"}`}
         >
-          <div className="flex h-16 items-center justify-between px-4 border-b">
-            <Link href="/" className="flex items-center gap-2 font-bold text-xl text-green-600">
-              SporTea
-            </Link>
+          <div className="flex h-16 items-center justify-end px-4 border-b">
             <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
               <X className="h-5 w-5" />
             </Button>
@@ -55,11 +69,6 @@ export function MainSidebar() {
     <div
       className={`hidden md:flex flex-col border-r bg-background h-screen sticky top-0 ${open ? "w-64" : "w-0"} transition-all duration-300`}
     >
-      <div className="flex h-16 items-center px-4 border-b">
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl text-green-600">
-          SporTea
-        </Link>
-      </div>
       <SidebarContent />
     </div>
   )
@@ -139,4 +148,7 @@ function SidebarContent() {
     </>
   )
 }
+
+// Export the toggle button so it can be used separately
+export { SidebarToggle }
 

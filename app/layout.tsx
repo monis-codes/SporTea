@@ -2,9 +2,10 @@ import type React from "react"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { SidebarProvider } from "@/components/sidebar-provider"
-import { MainSidebar } from "@/components/main-sidebar"
+import { MainSidebar, SidebarToggle } from "@/components/main-sidebar"
 import { MobileNav } from "@/components/mobile-nav"
 import { AuthProvider } from "@/components/auth-provider"
+import Link from "next/link"
 import "./globals.css"
 
 export const metadata = {
@@ -24,9 +25,23 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <AuthProvider>
             <SidebarProvider>
-              <div className="flex min-h-screen">
+              {/* Header */}
+              <header className="sticky top-0 w-full h-16 bg-background border-b z-[200] flex items-center px-6">
+                <div className="flex items-center gap-3">
+                  <SidebarToggle />
+                  <Link 
+                    href="/" 
+                    className="font-bold text-xl text-green-600 hover:text-green-700 transition-colors"
+                  >
+                    SporTea
+                  </Link>
+                </div>
+              </header>
+              
+              {/* Main content */}
+              <div className="flex min-h-[calc(100vh-4rem)]">
                 <MainSidebar />
-                <div className="flex-1">
+                <div className="flex-1 pt-4">
                   <div className="container relative">{children}</div>
                 </div>
               </div>

@@ -33,7 +33,7 @@ export default function Home() {
           </div>
           <div className="flex items-center justify-center">
             <Image
-              src="/placeholder.svg?height=400&width=600"
+              src="https://images.pexels.com/photos/27907317/pexels-photo-27907317/free-photo-of-cricket.jpeg"
               alt="SporTea Platform"
               width={600}
               height={400}
